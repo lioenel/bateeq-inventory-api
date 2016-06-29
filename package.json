@@ -1,0 +1,24 @@
+{
+  "name": "bateeq-inventory-api",
+  "version": "1.0.0",
+  "description": "RESTfu api for bateeq inventory",
+  "main": "index.js",
+  "dependencies": {
+    "bateeq-module": "git+https://github.com/moonlay/bateeq-module.git",
+    "restify": "^4.1.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moonlay/bateeq-inventory-api.git"
+  },
+  "author": "Tris Setiawan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/moonlay/bateeq-inventory-api/issues"
+  },
+  "homepage": "https://github.com/moonlay/bateeq-inventory-api#readme"
+}
