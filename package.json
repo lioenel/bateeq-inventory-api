@@ -1,13 +1,18 @@
 {
   "name": "bateeq-inventory-api",
   "version": "1.0.0",
-  "description": "RESTfu api for bateeq inventory",
-  "main": "index.js",
+  "description": "RESTful api for bateeq inventory",
+  "main": "server.js",
   "dependencies": {
     "bateeq-module": "git+https://github.com/moonlay/bateeq-module.git",
-    "restify": "^4.1.1"
+    "mongo-factory": "^1.0.0",
+    "mongodb": "^2.1.18",
+    "restify": "^4.1.1",
+    "restify-router": "^0.2.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "should": "^9.0.2"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
