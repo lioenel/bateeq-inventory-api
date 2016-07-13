@@ -4,7 +4,7 @@ var server = restify.createServer();
 server.use(restify.queryParser());
 server.use(restify.bodyParser());
 
-var originRouter = require('./src/routers/article-origin-router');
+var originRouter = require('./src/routers/storage-router');
 originRouter.applyRoutes(server);
 
 server.listen(process.env.PORT, process.env.IP);

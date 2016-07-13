@@ -1,11 +1,11 @@
 var Router = require('restify-router').Router;;
 var router = new Router();
-var ArticleOriginManager = require('bateeq-module').article.ArticleOriginManager;
+var StorageManager = require('bateeq-module').inventory.StorageManager;
 var db = require('../db');
 
-router.get('articles/origins', (request, response, next) => {
+router.get('inventories/storages', (request, response, next) => {
     db.get().then(db => {
-        var manager = new ArticleOriginManager(db, {
+        var manager = new StorageManager(db, {
             username: 'router'
         });
         
@@ -22,9 +22,9 @@ router.get('articles/origins', (request, response, next) => {
     })
 });
 
-router.get('articles/origins/:id', (request, response, next) => {
+router.get('inventories/storages/:id', (request, response, next) => {
     db.get().then(db => {
-        var manager = new ArticleOriginManager(db, {
+        var manager = new StorageManager(db, {
             username: 'router'
         });
         
@@ -41,9 +41,9 @@ router.get('articles/origins/:id', (request, response, next) => {
     })
 });
 
-router.post('articles/origins', (request, response, next) => {
+router.post('inventories/storages', (request, response, next) => {
     db.get().then(db => {
-        var manager = new ArticleOriginManager(db, {
+        var manager = new StorageManager(db, {
             username: 'router'
         });
         
@@ -51,7 +51,7 @@ router.post('articles/origins', (request, response, next) => {
 
         manager.create(data)
             .then(docId => {
-                response.header('Location', `articles/origins/${docId.toString()}`);
+                response.header('Location', `inventories/storages/${docId.toString()}`);
                 response.send(201);
             })
             .catch(e => {
@@ -61,9 +61,9 @@ router.post('articles/origins', (request, response, next) => {
     })
 });
 
-router.put('articles/origins/:id', (request, response, next) => {
+router.put('inventories/storages/:id', (request, response, next) => {
     db.get().then(db => {
-        var manager = new ArticleOriginManager(db, {
+        var manager = new StorageManager(db, {
             username: 'router'
         });
         
@@ -81,9 +81,9 @@ router.put('articles/origins/:id', (request, response, next) => {
     })
 });
 
-router.del('articles/origins/:id', (request, response, next) => {
+router.del('inventories/storages/:id', (request, response, next) => {
     db.get().then(db => {
-        var manager = new ArticleOriginManager(db, {
+        var manager = new StorageManager(db, {
             username: 'router'
         });
         
