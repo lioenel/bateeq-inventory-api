@@ -6,8 +6,14 @@ server.use(restify.queryParser());
 server.use(restify.bodyParser()); 
 server.use(restify.CORS());
    
-var originRouter = require('./src/routers/storage-router');
+var originRouter = require('./src/routers/v1/storage-router');
 originRouter.applyRoutes(server); 
+
+var transferInDocRouter = require('./src/routers/v1/transfer-in-doc-router');
+transferInDocRouter.applyRoutes(server); 
+
+var transferOutDocRouter = require('./src/routers/v1/transfer-out-doc-router');
+transferOutDocRouter.applyRoutes(server); 
 
 server.listen(process.env.PORT, process.env.IP);
 console.log(`server created at ${process.env.IP}:${process.env.PORT}`)

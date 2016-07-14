@@ -1,9 +1,12 @@
 var Router = require('restify-router').Router;;
 var router = new Router();
 var StorageManager = require('bateeq-module').inventory.StorageManager;
-var db = require('../db');
+var db = require('../../db');
+var resultFormatter = require("../../result-formatter");
 
-router.get('inventories/storages', (request, response, next) => {
+const apiVersion = '1.0.0';
+
+router.get('v1/inventories/storages', (request, response, next) => {
     db.get().then(db => {
         var manager = new StorageManager(db, {
             username: 'router'
@@ -12,17 +15,19 @@ router.get('inventories/storages', (request, response, next) => {
         var query = request.query;
 
         manager.read(query)
-            .then(docs => {
-                response.send(docs);
+            .then(docs => { 
+                var result = resultFormatter.ok(apiVersion, 200, docs);
+                response.send(200, result);
             })
             .catch(e => {
-                next(e);
+                var error = resultFormatter.fail(apiVersion, 400, e);
+                response.send(400, error);
             })
 
     })
 });
 
-router.get('inventories/storages/:id', (request, response, next) => {
+router.get('v1/inventories/storages/:id', (request, response, next) => {
     db.get().then(db => {
         var manager = new StorageManager(db, {
             username: 'router'
@@ -32,16 +37,18 @@ router.get('inventories/storages/:id', (request, response, next) => {
 
         manager.getById(id)
             .then(doc => {
-                response.send(doc);
+                var result = resultFormatter.ok(apiVersion, 200, doc);
+                response.send(200, result); 
             })
             .catch(e => {
-                next(e);
+                var error = resultFormatter.fail(apiVersion, 400, e);
+                response.send(400, error);
             })
 
     })
 });
 
-router.post('inventories/storages', (request, response, next) => {
+router.post('v1/inventories/storages', (request, response, next) => {
     db.get().then(db => {
         var manager = new StorageManager(db, {
             username: 'router'
@@ -52,16 +59,18 @@ router.post('inventories/storages', (request, response, next) => {
         manager.create(data)
             .then(docId => {
                 response.header('Location', `inventories/storages/${docId.toString()}`);
-                response.send(201);
+                var result = resultFormatter.ok(apiVersion, 201);
+                response.send(201, result);
             })
             .catch(e => {
-                next(e);
+                var error = resultFormatter.fail(apiVersion, 400, e);
+                response.send(400, error);
             })
 
     })
 });
 
-router.put('inventories/storages/:id', (request, response, next) => {
+router.put('v1/inventories/storages/:id', (request, response, next) => {
     db.get().then(db => {
         var manager = new StorageManager(db, {
             username: 'router'
@@ -72,16 +81,18 @@ router.put('inventories/storages/:id', (request, response, next) => {
 
         manager.update(data)
             .then(docId => {
-                response.send(200);
+                var result = resultFormatter.ok(apiVersion, 204);
+                response.send(204, result);
             })
             .catch(e => {
-                next(e);
+                var error = resultFormatter.fail(apiVersion, 400, e);
+                response.send(400, error);
             })
 
     })
 });
 
-router.del('inventories/storages/:id', (request, response, next) => {
+router.del('v1/inventories/storages/:id', (request, response, next) => {
     db.get().then(db => {
         var manager = new StorageManager(db, {
             username: 'router'
@@ -92,10 +103,12 @@ router.del('inventories/storages/:id', (request, response, next) => {
 
         manager.delete(data)
             .then(docId => {
-                response.send(200);
+                var result = resultFormatter.ok(apiVersion, 204);
+                response.send(204, result);
             })
             .catch(e => {
-                next(e);
+                var error = resultFormatter.fail(apiVersion, 400, e);
+                response.send(400, error);
             })
     })
 });
