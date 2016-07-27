@@ -21,5 +21,8 @@ transferInDocRouter.applyRoutes(server);
 var transferOutDocRouter = require('./src/routers/v1/transfer-out-doc-router');
 transferOutDocRouter.applyRoutes(server); 
 
+var ModuleRouter = require('./src/routers/v1/module-router');
+ModuleRouter.applyRoutes(server); 
+
 server.listen(process.env.PORT, process.env.IP);
 console.log(`server created at ${process.env.IP}:${process.env.PORT}`)
