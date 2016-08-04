@@ -24,6 +24,9 @@ transferOutDocRouter.applyRoutes(server);
 var inventoryDocModuleRouter = require('./src/routers/v1/inventory-doc-module-router');
 inventoryDocModuleRouter.applyRoutes(server); 
 
+var merchandiserDocModuleRouter = require('./src/routers/v1/merchandiser-doc-module-router');
+merchandiserDocModuleRouter.applyRoutes(server); 
+
 var ModuleRouter = require('./src/routers/v1/module-router');
 ModuleRouter.applyRoutes(server); 
 
