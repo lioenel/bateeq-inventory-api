@@ -67,7 +67,7 @@ router.post('v1/merchandisers/docs/:module', (request, response, next) => {
 
         manager.create(data)
             .then(docId => {
-                response.header('Location', `merchandisers/docs/:module/${docId.toString()}`);
+                response.header('Location', `merchandisers/docs/${module}/${docId.toString()}`);
                 var result = resultFormatter.ok(apiVersion, 201);
                 response.send(201, result);
             })
@@ -91,7 +91,7 @@ router.put('v1/merchandisers/docs/:module/:id', (request, response, next) => {
         var id = request.params.id;
         var data = request.body;
 
-        manager.update(data)
+        manager.updateNotDraft(data)
             .then(docId => {
                 var result = resultFormatter.ok(apiVersion, 204);
                 response.send(204, result);
@@ -141,7 +141,7 @@ router.post('v1/merchandisers/docs/:module/draft', (request, response, next) => 
 
         manager.createDraft(data)
             .then(docId => {
-                response.header('Location', `merchandisers/docs/:module/${docId.toString()}`);
+                response.header('Location', `merchandisers/docs/${module}/${docId.toString()}`);
                 var result = resultFormatter.ok(apiVersion, 201);
                 response.send(201, result);
             })

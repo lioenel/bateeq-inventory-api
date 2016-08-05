@@ -67,7 +67,7 @@ router.post('v1/inventories/docs/:module', (request, response, next) => {
 
         manager.create(data)
             .then(docId => {
-                response.header('Location', `inventories/docs/transfer-in/${docId.toString()}`);
+                response.header('Location', `inventories/docs/${module}/${docId.toString()}`);
                 var result = resultFormatter.ok(apiVersion, 201);
                 response.send(201, result);
             })
