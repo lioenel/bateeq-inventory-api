@@ -6,7 +6,7 @@ var resultFormatter = require("../../result-formatter");
 
 const apiVersion = '1.0.0';
 
-router.get('v1/merchandisers/docs/:module', (request, response, next) => {
+router.get('v1/merchandisers/docs/${module}', (request, response, next) => {
     db.get().then(db => {
         
         var module = request.params.module;
@@ -30,7 +30,7 @@ router.get('v1/merchandisers/docs/:module', (request, response, next) => {
     })
 });
 
-router.get('v1/merchandisers/docs/:module/:id', (request, response, next) => {
+router.get('v1/merchandisers/docs/${module}/:id', (request, response, next) => {
     db.get().then(db => {
         
         var module = request.params.module;
@@ -54,7 +54,7 @@ router.get('v1/merchandisers/docs/:module/:id', (request, response, next) => {
     })
 });
 
-router.post('v1/merchandisers/docs/:module', (request, response, next) => {
+router.post('v1/merchandisers/docs/${module}', (request, response, next) => {
     db.get().then(db => {
         
         var module = request.params.module;
@@ -67,7 +67,7 @@ router.post('v1/merchandisers/docs/:module', (request, response, next) => {
 
         manager.create(data)
             .then(docId => {
-                response.header('Location', `merchandisers/docs/:module/${docId.toString()}`);
+                response.header('Location', `merchandisers/docs/${module}/${docId.toString()}`);
                 var result = resultFormatter.ok(apiVersion, 201);
                 response.send(201, result);
             })
@@ -79,7 +79,7 @@ router.post('v1/merchandisers/docs/:module', (request, response, next) => {
     })
 });
 
-router.put('v1/merchandisers/docs/:module/:id', (request, response, next) => {
+router.put('v1/merchandisers/docs/${module}/:id', (request, response, next) => {
     db.get().then(db => {
         
         var module = request.params.module;
@@ -91,7 +91,7 @@ router.put('v1/merchandisers/docs/:module/:id', (request, response, next) => {
         var id = request.params.id;
         var data = request.body;
 
-        manager.update(data)
+        manager.updateNotDraft(data)
             .then(docId => {
                 var result = resultFormatter.ok(apiVersion, 204);
                 response.send(204, result);
@@ -104,7 +104,7 @@ router.put('v1/merchandisers/docs/:module/:id', (request, response, next) => {
     })
 }); 
 
-router.get('v1/merchandisers/docs/:module/draft/:id', (request, response, next) => {
+router.get('v1/merchandisers/docs/${module}/draft/:id', (request, response, next) => {
     db.get().then(db => {
         
         var module = request.params.module;
@@ -128,7 +128,7 @@ router.get('v1/merchandisers/docs/:module/draft/:id', (request, response, next) 
     })
 });
 
-router.post('v1/merchandisers/docs/:module/draft', (request, response, next) => {
+router.post('v1/merchandisers/docs/${module}/draft', (request, response, next) => {
     db.get().then(db => {
         
         var module = request.params.module;
@@ -141,7 +141,7 @@ router.post('v1/merchandisers/docs/:module/draft', (request, response, next) => 
 
         manager.createDraft(data)
             .then(docId => {
-                response.header('Location', `merchandisers/docs/:module/${docId.toString()}`);
+                response.header('Location', `merchandisers/docs/${module}/${docId.toString()}`);
                 var result = resultFormatter.ok(apiVersion, 201);
                 response.send(201, result);
             })
@@ -153,7 +153,7 @@ router.post('v1/merchandisers/docs/:module/draft', (request, response, next) => 
     })
 });
 
-router.put('v1/merchandisers/docs/:module/draft/:id', (request, response, next) => {
+router.put('v1/merchandisers/docs/${module}/draft/:id', (request, response, next) => {
     db.get().then(db => {
         
         var module = request.params.module;
@@ -178,7 +178,7 @@ router.put('v1/merchandisers/docs/:module/draft/:id', (request, response, next) 
     })
 });
 
-router.del('v1/merchandisers/docs/:module/draft/:id', (request, response, next) => {
+router.del('v1/merchandisers/docs/${module}/draft/:id', (request, response, next) => {
     db.get().then(db => {
         
         var module = request.params.module;
