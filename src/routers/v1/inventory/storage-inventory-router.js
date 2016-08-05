@@ -3,12 +3,12 @@ var router = new Router();
 var StorageManager = require('bateeq-module').inventory.StorageManager;
 var InventoryManager = require('bateeq-module').inventory.InventoryManager;
 var InventoryMovementManager = require('bateeq-module').inventory.InventoryMovementManager;
-var db = require('../../db');
-var resultFormatter = require("../../result-formatter");
+var db = require('../../../db');
+var resultFormatter = require("../../../result-formatter");
 
 const apiVersion = '1.0.0';
 
-router.get('v1/inventories/storages/:storageId/inventories', (request, response, next) => {
+router.get('v1/inventory/storages/:storageId/inventories', (request, response, next) => {
     db.get().then(db => {
         var manager = new InventoryManager(db, {
             username: 'router'
@@ -30,7 +30,7 @@ router.get('v1/inventories/storages/:storageId/inventories', (request, response,
     })
 });
 
-router.get('v1/inventories/storages/:storageId/inventories/:articleVariantId', (request, response, next) => {
+router.get('v1/inventory/storages/:storageId/inventories/:articleVariantId', (request, response, next) => {
     db.get().then(db => {
         var manager = new InventoryManager(db, {
             username: 'router'

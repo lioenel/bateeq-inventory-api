@@ -6,28 +6,28 @@ server.use(restify.queryParser());
 server.use(restify.bodyParser()); 
 server.use(restify.CORS());
    
-var originRouter = require('./src/routers/v1/storage-router');
+var originRouter = require('./src/routers/v1/inventory/storage-router');
 originRouter.applyRoutes(server); 
    
-var storageInventoryRouter = require('./src/routers/v1/storage-inventory-router');
+var storageInventoryRouter = require('./src/routers/v1/inventory/storage-inventory-router');
 storageInventoryRouter.applyRoutes(server); 
    
-var storageInventoryMovementRouter = require('./src/routers/v1/storage-inventory-movement-router');
+var storageInventoryMovementRouter = require('./src/routers/v1/inventory/storage-inventory-movement-router');
 storageInventoryMovementRouter.applyRoutes(server); 
 
-var transferInDocRouter = require('./src/routers/v1/transfer-in-doc-router');
+var transferInDocRouter = require('./src/routers/v1/inventory/transfer-in-doc-router');
 transferInDocRouter.applyRoutes(server); 
 
-var transferOutDocRouter = require('./src/routers/v1/transfer-out-doc-router');
+var transferOutDocRouter = require('./src/routers/v1/inventory/transfer-out-doc-router');
 transferOutDocRouter.applyRoutes(server); 
 
-var inventoryReceiveModuleRouter = require('./src/routers/v1/inventory-receive-module-router');
+var inventoryReceiveModuleRouter = require('./src/routers/v1/inventory/inventory-receive-module-router');
 inventoryReceiveModuleRouter.applyRoutes(server); 
 
-var inventoryDocModuleRouter = require('./src/routers/v1/inventory-doc-module-router');
+var inventoryDocModuleRouter = require('./src/routers/v1/inventory/inventory-doc-module-router');
 inventoryDocModuleRouter.applyRoutes(server); 
 
-var merchandiserDocModuleRouter = require('./src/routers/v1/merchandiser-doc-module-router');
+var merchandiserDocModuleRouter = require('./src/routers/v1/merchandiser/merchandiser-doc-module-router');
 merchandiserDocModuleRouter.applyRoutes(server); 
 
 var ModuleRouter = require('./src/routers/v1/module-router');

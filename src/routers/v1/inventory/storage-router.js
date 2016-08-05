@@ -1,12 +1,12 @@
 var Router = require('restify-router').Router;;
 var router = new Router();
 var StorageManager = require('bateeq-module').inventory.StorageManager;
-var db = require('../../db');
-var resultFormatter = require("../../result-formatter");
+var db = require('../../../db');
+var resultFormatter = require("../../../result-formatter");
 
 const apiVersion = '1.0.0';
 
-router.get('v1/inventories/storages', (request, response, next) => {
+router.get('v1/inventory/storages', (request, response, next) => {
     db.get().then(db => {
         var manager = new StorageManager(db, {
             username: 'router'
@@ -27,7 +27,7 @@ router.get('v1/inventories/storages', (request, response, next) => {
     })
 });
 
-router.get('v1/inventories/storages/:id', (request, response, next) => {
+router.get('v1/inventory/storages/:id', (request, response, next) => {
     db.get().then(db => {
         var manager = new StorageManager(db, {
             username: 'router'
@@ -48,7 +48,7 @@ router.get('v1/inventories/storages/:id', (request, response, next) => {
     })
 });
 
-router.post('v1/inventories/storages', (request, response, next) => {
+router.post('v1/inventory/storages', (request, response, next) => {
     db.get().then(db => {
         var manager = new StorageManager(db, {
             username: 'router'
@@ -70,7 +70,7 @@ router.post('v1/inventories/storages', (request, response, next) => {
     })
 });
 
-router.put('v1/inventories/storages/:id', (request, response, next) => {
+router.put('v1/inventory/storages/:id', (request, response, next) => {
     db.get().then(db => {
         var manager = new StorageManager(db, {
             username: 'router'
@@ -92,7 +92,7 @@ router.put('v1/inventories/storages/:id', (request, response, next) => {
     })
 });
 
-router.del('v1/inventories/storages/:id', (request, response, next) => {
+router.del('v1/inventory/storages/:id', (request, response, next) => {
     db.get().then(db => {
         var manager = new StorageManager(db, {
             username: 'router'
