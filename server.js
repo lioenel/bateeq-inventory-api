@@ -21,6 +21,9 @@ transferInDocRouter.applyRoutes(server);
 var transferOutDocRouter = require('./src/routers/v1/transfer-out-doc-router');
 transferOutDocRouter.applyRoutes(server); 
 
+var inventoryReceiveModuleRouter = require('./src/routers/v1/inventory-receive-module-router');
+inventoryReceiveModuleRouter.applyRoutes(server); 
+
 var inventoryDocModuleRouter = require('./src/routers/v1/inventory-doc-module-router');
 inventoryDocModuleRouter.applyRoutes(server); 
 
