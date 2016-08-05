@@ -6,7 +6,7 @@ var resultFormatter = require("../../result-formatter");
 
 const apiVersion = '1.0.0';
 
-router.get('v1/merchandisers/docs/${module}', (request, response, next) => {
+router.get('v1/merchandisers/docs/:module', (request, response, next) => {
     db.get().then(db => {
         
         var module = request.params.module;
@@ -30,7 +30,7 @@ router.get('v1/merchandisers/docs/${module}', (request, response, next) => {
     })
 });
 
-router.get('v1/merchandisers/docs/${module}/:id', (request, response, next) => {
+router.get('v1/merchandisers/docs/:module/:id', (request, response, next) => {
     db.get().then(db => {
         
         var module = request.params.module;
@@ -54,7 +54,7 @@ router.get('v1/merchandisers/docs/${module}/:id', (request, response, next) => {
     })
 });
 
-router.post('v1/merchandisers/docs/${module}', (request, response, next) => {
+router.post('v1/merchandisers/docs/:module', (request, response, next) => {
     db.get().then(db => {
         
         var module = request.params.module;
@@ -79,7 +79,7 @@ router.post('v1/merchandisers/docs/${module}', (request, response, next) => {
     })
 });
 
-router.put('v1/merchandisers/docs/${module}/:id', (request, response, next) => {
+router.put('v1/merchandisers/docs/:module/:id', (request, response, next) => {
     db.get().then(db => {
         
         var module = request.params.module;
@@ -104,7 +104,7 @@ router.put('v1/merchandisers/docs/${module}/:id', (request, response, next) => {
     })
 }); 
 
-router.get('v1/merchandisers/docs/${module}/draft/:id', (request, response, next) => {
+router.get('v1/merchandisers/docs/:module/draft/:id', (request, response, next) => {
     db.get().then(db => {
         
         var module = request.params.module;
@@ -128,7 +128,7 @@ router.get('v1/merchandisers/docs/${module}/draft/:id', (request, response, next
     })
 });
 
-router.post('v1/merchandisers/docs/${module}/draft', (request, response, next) => {
+router.post('v1/merchandisers/docs/:module/draft', (request, response, next) => {
     db.get().then(db => {
         
         var module = request.params.module;
@@ -153,7 +153,7 @@ router.post('v1/merchandisers/docs/${module}/draft', (request, response, next) =
     })
 });
 
-router.put('v1/merchandisers/docs/${module}/draft/:id', (request, response, next) => {
+router.put('v1/merchandisers/docs/:module/draft/:id', (request, response, next) => {
     db.get().then(db => {
         
         var module = request.params.module;
@@ -178,7 +178,7 @@ router.put('v1/merchandisers/docs/${module}/draft/:id', (request, response, next
     })
 });
 
-router.del('v1/merchandisers/docs/${module}/draft/:id', (request, response, next) => {
+router.del('v1/merchandisers/docs/:module/draft/:id', (request, response, next) => {
     db.get().then(db => {
         
         var module = request.params.module;
