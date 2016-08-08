@@ -1,2 +1,2 @@
 # bateeq-inventory-api
-RESTful api for bateeq inventory
+Bateeq RESTful inventory api

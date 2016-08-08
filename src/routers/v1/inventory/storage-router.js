@@ -1,17 +1,14 @@
 var Router = require('restify-router').Router;;
 var router = new Router();
-var map = require('bateeq-module').inventory.map;
-var db = require('../../db');
-var resultFormatter = require("../../result-formatter");
+var StorageManager = require('bateeq-module').inventory.StorageManager;
+var db = require('../../../db');
+var resultFormatter = require("../../../result-formatter");
 
 const apiVersion = '1.0.0';
 
-router.get('v1/inventories/docs/:module', (request, response, next) => {
+router.get('v1/inventory/storages', (request, response, next) => {
     db.get().then(db => {
-        
-        var module = request.params.module;
-        var Manager = map.get(module);
-        var manager = new Manager(db, {
+        var manager = new StorageManager(db, {
             username: 'router'
         });
         
@@ -30,12 +27,9 @@ router.get('v1/inventories/docs/:module', (request, response, next) => {
     })
 });
 
-router.get('v1/inventories/docs/:module/:id', (request, response, next) => {
+router.get('v1/inventory/storages/:id', (request, response, next) => {
     db.get().then(db => {
-        
-        var module = request.params.module;
-        var Manager = map.get(module);
-        var manager = new Manager(db, {
+        var manager = new StorageManager(db, {
             username: 'router'
         });
         
@@ -54,12 +48,9 @@ router.get('v1/inventories/docs/:module/:id', (request, response, next) => {
     })
 });
 
-router.post('v1/inventories/docs/:module', (request, response, next) => {
+router.post('v1/inventory/storages', (request, response, next) => {
     db.get().then(db => {
-        
-        var module = request.params.module;
-        var Manager = map.get(module);
-        var manager = new Manager(db, {
+        var manager = new StorageManager(db, {
             username: 'router'
         });
         
@@ -67,7 +58,7 @@ router.post('v1/inventories/docs/:module', (request, response, next) => {
 
         manager.create(data)
             .then(docId => {
-                response.header('Location', `inventories/docs/transfer-in/${docId.toString()}`);
+                response.header('Location', `inventories/storages/${docId.toString()}`);
                 var result = resultFormatter.ok(apiVersion, 201);
                 response.send(201, result);
             })
@@ -79,14 +70,11 @@ router.post('v1/inventories/docs/:module', (request, response, next) => {
     })
 });
 
-router.put('v1/inventories/docs/:module/:id', (request, response, next) => {
+router.put('v1/inventory/storages/:id', (request, response, next) => {
     db.get().then(db => {
-        
-        var module = request.params.module;
-        var Manager = map.get(module);
-        var manager = new Manager(db, {
+        var manager = new StorageManager(db, {
             username: 'router'
-        }); 
+        });
         
         var id = request.params.id;
         var data = request.body;
@@ -104,15 +92,12 @@ router.put('v1/inventories/docs/:module/:id', (request, response, next) => {
     })
 });
 
-router.del('v1/inventories/docs/:module/:id', (request, response, next) => {
+router.del('v1/inventory/storages/:id', (request, response, next) => {
     db.get().then(db => {
-        
-        var module = request.params.module;
-        var Manager = map.get(module);
-        var manager = new Manager(db, {
+        var manager = new StorageManager(db, {
             username: 'router'
         });
-         
+        
         var id = request.params.id;
         var data = request.body;
 
