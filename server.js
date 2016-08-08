@@ -28,10 +28,7 @@ var inventoryDocModuleRouter = require('./src/routers/v1/inventory/inventory-doc
 inventoryDocModuleRouter.applyRoutes(server); 
 
 var merchandiserDocModuleRouter = require('./src/routers/v1/merchandiser/merchandiser-doc-module-router');
-merchandiserDocModuleRouter.applyRoutes(server); 
-
-var ModuleRouter = require('./src/routers/v1/module-router');
-ModuleRouter.applyRoutes(server); 
+merchandiserDocModuleRouter.applyRoutes(server);  
 
 server.listen(process.env.PORT, process.env.IP);
 console.log(`server created at ${process.env.IP}:${process.env.PORT}`)

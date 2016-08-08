@@ -4,7 +4,7 @@
   "description": "RESTful api for bateeq inventory",
   "main": "server.js",
   "dependencies": {
-    "bateeq-module": "git+https://github.com/moonlay/bateeq-module.git",
+    "bateeq-module": "git+https://github.com/danliris/bateeq-module.git",
     "mongo-factory": "^1.0.0",
     "mongodb": "^2.1.18", 
     "restify": "^4.1.1",
@@ -18,12 +18,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/moonlay/bateeq-inventory-api.git"
+    "url": "git+https://github.com/danliris/bateeq-inventory-api.git"
   },
   "author": "Tris Setiawan",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/moonlay/bateeq-inventory-api/issues"
+    "url": "https://github.com/danliris/bateeq-inventory-api/issues"
   },
-  "homepage": "https://github.com/moonlay/bateeq-inventory-api#readme"
+  "homepage": "https://github.com/danliris/bateeq-inventory-api#readme"
 }
