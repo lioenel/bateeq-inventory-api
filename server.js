@@ -27,6 +27,9 @@ inventoryReceiveModuleRouter.applyRoutes(server);
 var inventoryDocModuleRouter = require('./src/routers/v1/inventory/inventory-doc-module-router');
 inventoryDocModuleRouter.applyRoutes(server); 
 
+var merchandiserDocModuleSpecifyRouter = require('./src/routers/v1/merchandiser/merchandiser-doc-module-specify-router');
+merchandiserDocModuleSpecifyRouter.applyRoutes(server);  
+
 var merchandiserDocModuleRouter = require('./src/routers/v1/merchandiser/merchandiser-doc-module-router');
 merchandiserDocModuleRouter.applyRoutes(server);  
 
