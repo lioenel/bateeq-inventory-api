@@ -29,4 +29,27 @@ router.get('v1/merchandiser/docs/efr-pk/pending', (request, response, next) => {
 }); 
 
 
+router.get('v1/merchandiser/docs/efr-pk', (request, response, next) => {
+    db.get().then(db => {
+        var Manager = map.get("efr-pk");
+        var manager = new Manager(db, {
+            username: 'router'
+        });
+        
+        var query = request.query;
+
+        manager.readReceived(query)
+            .then(docs => { 
+                var result = resultFormatter.ok(apiVersion, 200, docs);
+                response.send(200, result);
+            })
+            .catch(e => {
+                var error = resultFormatter.fail(apiVersion, 400, e);
+                response.send(400, error);
+            })
+
+    })
+}); 
+
+
 module.exports = router;
