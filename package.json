@@ -5,8 +5,9 @@
   "main": "server.js",
   "dependencies": {
     "bateeq-module": "git+https://github.com/danliris/bateeq-module.git",
+    "js-toolkit": "git+https://github.com/pinkgorilla/js-toolkit.git",
     "mongo-factory": "^1.0.0",
-    "mongodb": "^2.1.18", 
+    "mongodb": "^2.1.18",
     "restify": "^4.1.1",
     "restify-router": "^0.2.1"
   },
