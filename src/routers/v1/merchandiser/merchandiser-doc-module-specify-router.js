@@ -29,7 +29,7 @@ router.get('v1/merchandiser/docs/efr-pk/pending', (request, response, next) => {
 }); 
 
 
-router.get('v1/merchandiser/docs/efr-pk', (request, response, next) => {
+router.get('v1/merchandiser/docs/efr-pk/receive', (request, response, next) => {
     db.get().then(db => {
         var Manager = map.get("efr-pk");
         var manager = new Manager(db, {
