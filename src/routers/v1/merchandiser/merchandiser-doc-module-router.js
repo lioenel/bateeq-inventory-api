@@ -29,7 +29,7 @@ router.get('v1/merchandiser/docs/:module/draft/:id', (request, response, next) =
     })
 });
 
-router.get('v1/merchandiser/docs/:module/:id', (request, response, next) => {
+router.get('v1/merchandiser/docs/:module/submitted/:id', (request, response, next) => {
     db.get().then(db => {
         
         var module = request.params.module;
@@ -126,9 +126,7 @@ router.get('v1/merchandiser/docs/:module', (request, response, next) => {
     })
 });
 
-
-
-router.post('v1/merchandiser/docs/:module', (request, response, next) => {
+router.post('v1/merchandiser/docs/:module/submitted', (request, response, next) => {
     db.get().then(db => {
         
         var module = request.params.module;
@@ -152,6 +150,57 @@ router.post('v1/merchandiser/docs/:module', (request, response, next) => {
 
     })
 });
+
+router.put('v1/merchandiser/docs/:module/submitted/:id', (request, response, next) => {
+    db.get().then(db => {
+        
+        var module = request.params.module;
+        var Manager = map.get(module);
+        var manager = new Manager(db, {
+            username: 'router'
+        }); 
+        
+        var id = request.params.id;
+        var data = request.body;
+
+        manager.updateNotDraft(data)
+            .then(docId => {
+                var result = resultFormatter.ok(apiVersion, 204);
+                response.send(204, result);
+            })
+            .catch(e => {
+                var error = resultFormatter.fail(apiVersion, 400, e);
+                response.send(400, error);
+            })
+
+    })
+});
+
+router.put('v1/merchandiser/docs/:module/draft/:id', (request, response, next) => {
+    db.get().then(db => {
+        
+        var module = request.params.module;
+        var Manager = map.get(module);
+        var manager = new Manager(db, {
+            username: 'router'
+        }); 
+        
+        var id = request.params.id;
+        var data = request.body;
+
+        manager.updateDraft(data)
+            .then(docId => {
+                var result = resultFormatter.ok(apiVersion, 204);
+                response.send(204, result);
+            })
+            .catch(e => {
+                var error = resultFormatter.fail(apiVersion, 400, e);
+                response.send(400, error);
+            })
+
+    })
+});
+
 
  
 
