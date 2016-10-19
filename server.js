@@ -9,6 +9,9 @@ server.use(restify.CORS());
 var originRouter = require('./src/routers/v1/inventory/storage-router');
 originRouter.applyRoutes(server); 
    
+var storeRouter = require('./src/routers/v1/inventory/store-router');
+storeRouter.applyRoutes(server); 
+   
 var storageInventoryRouter = require('./src/routers/v1/inventory/storage-inventory-router');
 storageInventoryRouter.applyRoutes(server); 
    
@@ -32,6 +35,19 @@ merchandiserDocModuleSpecifyRouter.applyRoutes(server);
 
 var merchandiserDocModuleRouter = require('./src/routers/v1/merchandiser/merchandiser-doc-module-router');
 merchandiserDocModuleRouter.applyRoutes(server);  
+ 
+var paymentDocModuleRouter = require('./src/routers/v1/pos/payment-doc-module-router');
+paymentDocModuleRouter.applyRoutes(server);  
+
+var posMasterBankRouter = require('./src/routers/v1/pos-master/bank-router');
+posMasterBankRouter.applyRoutes(server); 
+
+var posMasterCardTypeRouter = require('./src/routers/v1/pos-master/card-type-router');
+posMasterCardTypeRouter.applyRoutes(server); 
+
+var posMasterPaymentTypeRouter = require('./src/routers/v1/pos-master/payment-type-router');
+posMasterPaymentTypeRouter.applyRoutes(server); 
+
 
 server.listen(process.env.PORT, process.env.IP);
 console.log(`server created at ${process.env.IP}:${process.env.PORT}`)
