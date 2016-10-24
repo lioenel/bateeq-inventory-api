@@ -48,6 +48,12 @@ posMasterCardTypeRouter.applyRoutes(server);
 var posMasterPaymentTypeRouter = require('./src/routers/v1/pos-master/payment-type-router');
 posMasterPaymentTypeRouter.applyRoutes(server); 
 
+var promoRewardTypeRouter = require('./src/routers/v1/promo/reward-type-router');
+promoRewardTypeRouter.applyRoutes(server);
+
+var promoRouter = require('./src/routers/v1/promo/promo-router');
+promoRouter.applyRoutes(server); 
+
 
 server.listen(process.env.PORT, process.env.IP);
 console.log(`server created at ${process.env.IP}:${process.env.PORT}`)
