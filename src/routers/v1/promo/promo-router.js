@@ -48,6 +48,32 @@ router.get('v1/promo/docs/promoes/:id', (request, response, next) => {
     })
 });
 
+router.get('v1/promo/docs/promoes/:storeId/:variantId/:datetime', (request, response, next) => {
+    db.get().then(db => {
+        var manager = new PromoManager(db, {
+            username: 'router'
+        });
+        
+        
+        var storeId = request.params.storeId; 
+        var variantId = request.params.variantId;  
+        //Date Format : yyyy-MM-ddThh:mm:ss
+        //var datetime = new Date(request.params.datetime);
+        var datetime = request.params.datetime;
+
+        manager.getByStoreVariantDatetime(storeId, variantId, datetime)
+            .then(doc => {
+                var result = resultFormatter.ok(apiVersion, 200, doc);
+                response.send(200, result); 
+            })
+            .catch(e => {
+                var error = resultFormatter.fail(apiVersion, 400, e);
+                response.send(400, error);
+            })
+
+    })
+});
+
 router.post('v1/promo/docs/promoes', (request, response, next) => {
     db.get().then(db => {
         var manager = new PromoManager(db, {
