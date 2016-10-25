@@ -1,17 +1,14 @@
 var Router = require('restify-router').Router;;
 var router = new Router();
-var map = require('bateeq-module').inventory.map;
+var PaymentManager = require('bateeq-module').sales.SalesManager;
 var db = require('../../../db');
 var resultFormatter = require("../../../result-formatter");
 
 const apiVersion = '1.0.0';
 
-router.get('/:module', (request, response, next) => {
+router.get('/', (request, response, next) => {
     db.get().then(db => {
-        
-        var module = request.params.module;
-        var Manager = map.get(module);
-        var manager = new Manager(db, {
+        var manager = new PaymentManager(db, {
             username: 'router'
         });
         
@@ -30,12 +27,9 @@ router.get('/:module', (request, response, next) => {
     })
 });
 
-router.get('/:module/:id', (request, response, next) => {
+router.get('/:id', (request, response, next) => {
     db.get().then(db => {
-        
-        var module = request.params.module;
-        var Manager = map.get(module);
-        var manager = new Manager(db, {
+        var manager = new PaymentManager(db, {
             username: 'router'
         });
         
@@ -54,12 +48,9 @@ router.get('/:module/:id', (request, response, next) => {
     })
 });
 
-router.post('/:module', (request, response, next) => {
+router.post('/', (request, response, next) => {
     db.get().then(db => {
-        
-        var module = request.params.module;
-        var Manager = map.get(module);
-        var manager = new Manager(db, {
+        var manager = new PaymentManager(db, {
             username: 'router'
         });
         
@@ -67,7 +58,7 @@ router.post('/:module', (request, response, next) => {
 
         manager.create(data)
             .then(docId => {
-                response.header('Location', `inventories/docs/${module}/${docId.toString()}`);
+                response.header('Location', `sales/docs/sales/${docId.toString()}`);
                 var result = resultFormatter.ok(apiVersion, 201);
                 response.send(201, result);
             })
@@ -79,14 +70,11 @@ router.post('/:module', (request, response, next) => {
     })
 });
 
-router.put('/:module/:id', (request, response, next) => {
+router.put('/:id', (request, response, next) => {
     db.get().then(db => {
-        
-        var module = request.params.module;
-        var Manager = map.get(module);
-        var manager = new Manager(db, {
+        var manager = new PaymentManager(db, {
             username: 'router'
-        }); 
+        });
         
         var id = request.params.id;
         var data = request.body;
@@ -104,15 +92,12 @@ router.put('/:module/:id', (request, response, next) => {
     })
 });
 
-router.del('/:module/:id', (request, response, next) => {
+router.del('/:id', (request, response, next) => {
     db.get().then(db => {
-        
-        var module = request.params.module;
-        var Manager = map.get(module);
-        var manager = new Manager(db, {
+        var manager = new PaymentManager(db, {
             username: 'router'
         });
-         
+        
         var id = request.params.id;
         var data = request.body;
 

@@ -8,7 +8,7 @@ var resultFormatter = require("../../../result-formatter");
 
 const apiVersion = '1.0.0';
 
-router.get('v1/inventory/storages/:storageId/inventories', (request, response, next) => {
+router.get('/:storageId/inventories', (request, response, next) => {
     db.get().then(db => {
         var manager = new InventoryManager(db, {
             username: 'router'
@@ -30,7 +30,7 @@ router.get('v1/inventory/storages/:storageId/inventories', (request, response, n
     })
 });
 
-router.get('v1/inventory/storages/:storageId/inventories/:articleVariantId', (request, response, next) => {
+router.get('/:storageId/inventories/:articleVariantId', (request, response, next) => {
     db.get().then(db => {
         var manager = new InventoryManager(db, {
             username: 'router'

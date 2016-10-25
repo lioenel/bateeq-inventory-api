@@ -7,53 +7,49 @@ server.use(restify.bodyParser());
 server.use(restify.CORS());
    
 var originRouter = require('./src/routers/v1/inventory/storage-router');
-originRouter.applyRoutes(server); 
-   
-var storeRouter = require('./src/routers/v1/inventory/store-router');
-storeRouter.applyRoutes(server); 
-   
+originRouter.applyRoutes(server, "v1/inventory/storages"); 
+    
 var storageInventoryRouter = require('./src/routers/v1/inventory/storage-inventory-router');
-storageInventoryRouter.applyRoutes(server); 
+storageInventoryRouter.applyRoutes(server, "v1/inventory/storages"); 
    
 var storageInventoryMovementRouter = require('./src/routers/v1/inventory/storage-inventory-movement-router');
-storageInventoryMovementRouter.applyRoutes(server); 
+storageInventoryMovementRouter.applyRoutes(server, "v1/inventory/storages"); 
 
 var transferInDocRouter = require('./src/routers/v1/inventory/transfer-in-doc-router');
-transferInDocRouter.applyRoutes(server); 
+transferInDocRouter.applyRoutes(server, "v1/inventory/docs/transfer-in"); 
 
 var transferOutDocRouter = require('./src/routers/v1/inventory/transfer-out-doc-router');
-transferOutDocRouter.applyRoutes(server); 
+transferOutDocRouter.applyRoutes(server, "v1/inventory/docs/transfer-out"); 
 
 var inventoryReceiveModuleRouter = require('./src/routers/v1/inventory/inventory-receive-module-router');
-inventoryReceiveModuleRouter.applyRoutes(server); 
+inventoryReceiveModuleRouter.applyRoutes(server, "v1/inventory/docs"); 
 
 var inventoryDocModuleRouter = require('./src/routers/v1/inventory/inventory-doc-module-router');
-inventoryDocModuleRouter.applyRoutes(server); 
+inventoryDocModuleRouter.applyRoutes(server, "v1/inventory/docs"); 
 
 var merchandiserDocModuleSpecifyRouter = require('./src/routers/v1/merchandiser/merchandiser-doc-module-specify-router');
-merchandiserDocModuleSpecifyRouter.applyRoutes(server);  
+merchandiserDocModuleSpecifyRouter.applyRoutes(server, "v1/merchandiser/docs");  
 
 var merchandiserDocModuleRouter = require('./src/routers/v1/merchandiser/merchandiser-doc-module-router');
-merchandiserDocModuleRouter.applyRoutes(server);  
+merchandiserDocModuleRouter.applyRoutes(server, "v1/merchandiser/docs");  
  
-var paymentDocModuleRouter = require('./src/routers/v1/pos/payment-doc-module-router');
-paymentDocModuleRouter.applyRoutes(server);  
+var masterStoreRouter = require('./src/routers/v1/master/store-router');
+masterStoreRouter.applyRoutes(server, "v1/master/stores");
 
-var posMasterBankRouter = require('./src/routers/v1/pos-master/bank-router');
-posMasterBankRouter.applyRoutes(server); 
+var masterBankRouter = require('./src/routers/v1/master/bank-router');
+masterBankRouter.applyRoutes(server, "v1/master/banks");
 
-var posMasterCardTypeRouter = require('./src/routers/v1/pos-master/card-type-router');
-posMasterCardTypeRouter.applyRoutes(server); 
+var masterCardTypeRouter = require('./src/routers/v1/master/card-type-router');
+masterCardTypeRouter.applyRoutes(server, "v1/master/cardtypes/"); 
 
-var posMasterPaymentTypeRouter = require('./src/routers/v1/pos-master/payment-type-router');
-posMasterPaymentTypeRouter.applyRoutes(server); 
+var salesModuleRouter = require('./src/routers/v1/sales/sales-module-router');
+salesModuleRouter.applyRoutes(server, "v1/sales/docs/sales");  
 
-var promoRewardTypeRouter = require('./src/routers/v1/promo/reward-type-router');
-promoRewardTypeRouter.applyRoutes(server);
+var salesRewardTypeRouter = require('./src/routers/v1/sales/reward-type-router');
+salesRewardTypeRouter.applyRoutes(server, "v1/sales/rewardtypes");
 
-var promoRouter = require('./src/routers/v1/promo/promo-router');
-promoRouter.applyRoutes(server); 
-
+var salesPromoRouter = require('./src/routers/v1/sales/promo-router');
+salesPromoRouter.applyRoutes(server, "v1/sales/docs/promos"); 
 
 server.listen(process.env.PORT, process.env.IP);
 console.log(`server created at ${process.env.IP}:${process.env.PORT}`)

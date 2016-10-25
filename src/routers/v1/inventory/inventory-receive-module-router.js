@@ -6,7 +6,7 @@ var resultFormatter = require("../../../result-formatter");
 
 const apiVersion = '1.0.0';
 
-router.get('v1/inventory/docs/efr-tb-bbt/pending', (request, response, next) => {
+router.get('/efr-tb-bbt/pending', (request, response, next) => {
     db.get().then(db => {
        var Manager = map.get("efr-tb-bbt");
         var manager = new Manager(db, {
@@ -28,7 +28,7 @@ router.get('v1/inventory/docs/efr-tb-bbt/pending', (request, response, next) => 
     })
 });
 
-router.get('v1/inventory/docs/efr-tb-bat/pending', (request, response, next) => {
+router.get('/efr-tb-bat/pending', (request, response, next) => {
     db.get().then(db => {
        var Manager = map.get("efr-tb-bat");
         var manager = new Manager(db, {
@@ -51,7 +51,7 @@ router.get('v1/inventory/docs/efr-tb-bat/pending', (request, response, next) => 
 
 
 
-router.get('v1/inventory/docs/efr-tb-bbt/pending/:id', (request, response, next) => {
+router.get('/efr-tb-bbt/pending/:id', (request, response, next) => {
     db.get().then(db => {
        var Manager = map.get("efr-tb-bbt");
         var manager = new Manager(db, {
@@ -72,7 +72,7 @@ router.get('v1/inventory/docs/efr-tb-bbt/pending/:id', (request, response, next)
     })
 });
 
-router.get('v1/inventory/docs/efr-tb-bat/pending/:id', (request, response, next) => {
+router.get('/efr-tb-bat/pending/:id', (request, response, next) => {
     db.get().then(db => {
        var Manager = map.get("efr-tb-bat");
         var manager = new Manager(db, {
