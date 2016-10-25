@@ -51,6 +51,5 @@ salesRewardTypeRouter.applyRoutes(server, "v1/sales/rewardtypes");
 var salesPromoRouter = require('./src/routers/v1/sales/promo-router');
 salesPromoRouter.applyRoutes(server, "v1/sales/docs/promos"); 
 
-
 server.listen(process.env.PORT, process.env.IP);
 console.log(`server created at ${process.env.IP}:${process.env.PORT}`)
