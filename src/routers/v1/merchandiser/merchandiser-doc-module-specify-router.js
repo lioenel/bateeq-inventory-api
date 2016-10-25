@@ -6,7 +6,7 @@ var resultFormatter = require("../../../result-formatter");
 
 const apiVersion = '1.0.0';
 
-router.get('v1/merchandiser/docs/efr-pk/pending', (request, response, next) => {
+router.get('/efr-pk/pending', (request, response, next) => {
     db.get().then(db => {
         var Manager = map.get("efr-pk");
         var manager = new Manager(db, {
@@ -29,7 +29,7 @@ router.get('v1/merchandiser/docs/efr-pk/pending', (request, response, next) => {
 }); 
 
 
-router.get('v1/merchandiser/docs/efr-pk/received', (request, response, next) => {
+router.get('/efr-pk/received', (request, response, next) => {
     db.get().then(db => {
         var Manager = map.get("efr-pk");
         var manager = new Manager(db, {

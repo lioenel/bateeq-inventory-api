@@ -6,7 +6,7 @@ var resultFormatter = require("../../../result-formatter");
 
 const apiVersion = '1.0.0';
 
-router.get('v1/sales/docs/promos', (request, response, next) => {
+router.get('/', (request, response, next) => {
     db.get().then(db => {
         var manager = new PromoManager(db, {
             username: 'router'
@@ -27,7 +27,7 @@ router.get('v1/sales/docs/promos', (request, response, next) => {
     })
 });
 
-router.get('v1/sales/docs/promos/:id', (request, response, next) => {
+router.get('/:id', (request, response, next) => {
     db.get().then(db => {
         var manager = new PromoManager(db, {
             username: 'router'
@@ -48,7 +48,7 @@ router.get('v1/sales/docs/promos/:id', (request, response, next) => {
     })
 });
 
-router.get('v1/sales/docs/promos/:storeId/:variantId/:datetime', (request, response, next) => {
+router.get('/:storeId/:variantId/:datetime', (request, response, next) => {
     db.get().then(db => {
         var manager = new PromoManager(db, {
             username: 'router'
@@ -74,7 +74,7 @@ router.get('v1/sales/docs/promos/:storeId/:variantId/:datetime', (request, respo
     })
 });
 
-router.post('v1/sales/docs/promos', (request, response, next) => {
+router.post('/', (request, response, next) => {
     db.get().then(db => {
         var manager = new PromoManager(db, {
             username: 'router'
@@ -96,7 +96,7 @@ router.post('v1/sales/docs/promos', (request, response, next) => {
     })
 });
 
-router.put('v1/sales/docs/promos/:id', (request, response, next) => {
+router.put('/:id', (request, response, next) => {
     db.get().then(db => {
         var manager = new PromoManager(db, {
             username: 'router'
@@ -118,7 +118,7 @@ router.put('v1/sales/docs/promos/:id', (request, response, next) => {
     })
 });
 
-router.del('v1/sales/docs/promos/:id', (request, response, next) => {
+router.del('/:id', (request, response, next) => {
     db.get().then(db => {
         var manager = new PromoManager(db, {
             username: 'router'
