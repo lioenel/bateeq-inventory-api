@@ -1,14 +1,14 @@
 var Router = require('restify-router').Router;;
 var router = new Router();
-var CardTypeManager = require('bateeq-module').posmaster.CardTypeManager;
+var PromoManager = require('bateeq-module').sales.PromoManager;
 var db = require('../../../db');
 var resultFormatter = require("../../../result-formatter");
 
 const apiVersion = '1.0.0';
 
-router.get('v1/pos/cardtypes', (request, response, next) => {
+router.get('v1/sales/docs/promos', (request, response, next) => {
     db.get().then(db => {
-        var manager = new CardTypeManager(db, {
+        var manager = new PromoManager(db, {
             username: 'router'
         });
         
@@ -27,9 +27,9 @@ router.get('v1/pos/cardtypes', (request, response, next) => {
     })
 });
 
-router.get('v1/pos/cardtypes/:id', (request, response, next) => {
+router.get('v1/sales/docs/promos/:id', (request, response, next) => {
     db.get().then(db => {
-        var manager = new CardTypeManager(db, {
+        var manager = new PromoManager(db, {
             username: 'router'
         });
         
@@ -48,9 +48,35 @@ router.get('v1/pos/cardtypes/:id', (request, response, next) => {
     })
 });
 
-router.post('v1/pos/cardtypes', (request, response, next) => {
+router.get('v1/sales/docs/promos/:storeId/:variantId/:datetime', (request, response, next) => {
     db.get().then(db => {
-        var manager = new CardTypeManager(db, {
+        var manager = new PromoManager(db, {
+            username: 'router'
+        });
+        
+        
+        var storeId = request.params.storeId; 
+        var variantId = request.params.variantId;  
+        //Date Format : yyyy-MM-ddThh:mm:ss
+        //var datetime = new Date(request.params.datetime);
+        var datetime = request.params.datetime;
+
+        manager.getByStoreVariantDatetime(storeId, variantId, datetime)
+            .then(doc => {
+                var result = resultFormatter.ok(apiVersion, 200, doc);
+                response.send(200, result); 
+            })
+            .catch(e => {
+                var error = resultFormatter.fail(apiVersion, 400, e);
+                response.send(400, error);
+            })
+
+    })
+});
+
+router.post('v1/sales/docs/promos', (request, response, next) => {
+    db.get().then(db => {
+        var manager = new PromoManager(db, {
             username: 'router'
         });
         
@@ -58,7 +84,7 @@ router.post('v1/pos/cardtypes', (request, response, next) => {
 
         manager.create(data)
             .then(docId => {
-                response.header('Location', `pos/cardtypes/${docId.toString()}`);
+                response.header('Location', `sales/docs/promos/${docId.toString()}`);
                 var result = resultFormatter.ok(apiVersion, 201);
                 response.send(201, result);
             })
@@ -70,9 +96,9 @@ router.post('v1/pos/cardtypes', (request, response, next) => {
     })
 });
 
-router.put('v1/pos/cardtypes/:id', (request, response, next) => {
+router.put('v1/sales/docs/promos/:id', (request, response, next) => {
     db.get().then(db => {
-        var manager = new CardTypeManager(db, {
+        var manager = new PromoManager(db, {
             username: 'router'
         });
         
@@ -92,9 +118,9 @@ router.put('v1/pos/cardtypes/:id', (request, response, next) => {
     })
 });
 
-router.del('v1/pos/cardtypes/:id', (request, response, next) => {
+router.del('v1/sales/docs/promos/:id', (request, response, next) => {
     db.get().then(db => {
-        var manager = new CardTypeManager(db, {
+        var manager = new PromoManager(db, {
             username: 'router'
         });
         

@@ -1,14 +1,14 @@
 var Router = require('restify-router').Router;;
 var router = new Router();
-var BankManager = require('bateeq-module').posmaster.BankManager;
+var PaymentManager = require('bateeq-module').sales.SalesManager;
 var db = require('../../../db');
 var resultFormatter = require("../../../result-formatter");
 
 const apiVersion = '1.0.0';
 
-router.get('v1/pos/banks', (request, response, next) => {
+router.get('v1/sales/docs/sales', (request, response, next) => {
     db.get().then(db => {
-        var manager = new BankManager(db, {
+        var manager = new PaymentManager(db, {
             username: 'router'
         });
         
@@ -27,9 +27,9 @@ router.get('v1/pos/banks', (request, response, next) => {
     })
 });
 
-router.get('v1/pos/banks/:id', (request, response, next) => {
+router.get('v1/sales/docs/sales/:id', (request, response, next) => {
     db.get().then(db => {
-        var manager = new BankManager(db, {
+        var manager = new PaymentManager(db, {
             username: 'router'
         });
         
@@ -48,9 +48,9 @@ router.get('v1/pos/banks/:id', (request, response, next) => {
     })
 });
 
-router.post('v1/pos/banks', (request, response, next) => {
+router.post('v1/sales/docs/sales', (request, response, next) => {
     db.get().then(db => {
-        var manager = new BankManager(db, {
+        var manager = new PaymentManager(db, {
             username: 'router'
         });
         
@@ -58,7 +58,7 @@ router.post('v1/pos/banks', (request, response, next) => {
 
         manager.create(data)
             .then(docId => {
-                response.header('Location', `pos/banks/${docId.toString()}`);
+                response.header('Location', `sales/docs/sales/${docId.toString()}`);
                 var result = resultFormatter.ok(apiVersion, 201);
                 response.send(201, result);
             })
@@ -70,9 +70,9 @@ router.post('v1/pos/banks', (request, response, next) => {
     })
 });
 
-router.put('v1/pos/banks/:id', (request, response, next) => {
+router.put('v1/sales/docs/sales/:id', (request, response, next) => {
     db.get().then(db => {
-        var manager = new BankManager(db, {
+        var manager = new PaymentManager(db, {
             username: 'router'
         });
         
@@ -92,9 +92,9 @@ router.put('v1/pos/banks/:id', (request, response, next) => {
     })
 });
 
-router.del('v1/pos/banks/:id', (request, response, next) => {
+router.del('v1/sales/docs/sales/:id', (request, response, next) => {
     db.get().then(db => {
-        var manager = new BankManager(db, {
+        var manager = new PaymentManager(db, {
             username: 'router'
         });
         

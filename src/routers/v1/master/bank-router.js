@@ -1,14 +1,14 @@
 var Router = require('restify-router').Router;;
 var router = new Router();
-var RewardTypeManager = require('bateeq-module').promo.RewardTypeManager;
+var BankManager = require('bateeq-module').master.BankManager;
 var db = require('../../../db');
 var resultFormatter = require("../../../result-formatter");
 
 const apiVersion = '1.0.0';
 
-router.get('v1/promo/rewardtypes', (request, response, next) => {
+router.get('v1/master/banks', (request, response, next) => {
     db.get().then(db => {
-        var manager = new RewardTypeManager(db, {
+        var manager = new BankManager(db, {
             username: 'router'
         });
         
@@ -27,9 +27,9 @@ router.get('v1/promo/rewardtypes', (request, response, next) => {
     })
 });
 
-router.get('v1/promo/rewardtypes/:id', (request, response, next) => {
+router.get('v1/master/banks/:id', (request, response, next) => {
     db.get().then(db => {
-        var manager = new RewardTypeManager(db, {
+        var manager = new BankManager(db, {
             username: 'router'
         });
         
@@ -48,9 +48,9 @@ router.get('v1/promo/rewardtypes/:id', (request, response, next) => {
     })
 });
 
-router.post('v1/promo/rewardtypes', (request, response, next) => {
+router.post('v1/master/banks', (request, response, next) => {
     db.get().then(db => {
-        var manager = new RewardTypeManager(db, {
+        var manager = new BankManager(db, {
             username: 'router'
         });
         
@@ -58,7 +58,7 @@ router.post('v1/promo/rewardtypes', (request, response, next) => {
 
         manager.create(data)
             .then(docId => {
-                response.header('Location', `promo/rewardtypes/${docId.toString()}`);
+                response.header('Location', `masters/banks/${docId.toString()}`);
                 var result = resultFormatter.ok(apiVersion, 201);
                 response.send(201, result);
             })
@@ -70,9 +70,9 @@ router.post('v1/promo/rewardtypes', (request, response, next) => {
     })
 });
 
-router.put('v1/promo/rewardtypes/:id', (request, response, next) => {
+router.put('v1/master/banks/:id', (request, response, next) => {
     db.get().then(db => {
-        var manager = new RewardTypeManager(db, {
+        var manager = new BankManager(db, {
             username: 'router'
         });
         
@@ -92,9 +92,9 @@ router.put('v1/promo/rewardtypes/:id', (request, response, next) => {
     })
 });
 
-router.del('v1/promo/rewardtypes/:id', (request, response, next) => {
+router.del('v1/master/banks/:id', (request, response, next) => {
     db.get().then(db => {
-        var manager = new RewardTypeManager(db, {
+        var manager = new BankManager(db, {
             username: 'router'
         });
         

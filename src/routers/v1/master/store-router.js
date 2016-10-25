@@ -1,14 +1,14 @@
 var Router = require('restify-router').Router;;
 var router = new Router();
-var PromoManager = require('bateeq-module').promo.PromoManager;
+var StoreManager = require('bateeq-module').master.StoreManager;
 var db = require('../../../db');
 var resultFormatter = require("../../../result-formatter");
 
 const apiVersion = '1.0.0';
 
-router.get('v1/promo/docs/promoes', (request, response, next) => {
+router.get('v1/master/stores', (request, response, next) => {
     db.get().then(db => {
-        var manager = new PromoManager(db, {
+        var manager = new StoreManager(db, {
             username: 'router'
         });
         
@@ -27,9 +27,9 @@ router.get('v1/promo/docs/promoes', (request, response, next) => {
     })
 });
 
-router.get('v1/promo/docs/promoes/:id', (request, response, next) => {
+router.get('v1/master/stores/:id', (request, response, next) => {
     db.get().then(db => {
-        var manager = new PromoManager(db, {
+        var manager = new StoreManager(db, {
             username: 'router'
         });
         
@@ -48,35 +48,9 @@ router.get('v1/promo/docs/promoes/:id', (request, response, next) => {
     })
 });
 
-router.get('v1/promo/docs/promoes/:storeId/:variantId/:datetime', (request, response, next) => {
+router.post('v1/master/stores', (request, response, next) => {
     db.get().then(db => {
-        var manager = new PromoManager(db, {
-            username: 'router'
-        });
-        
-        
-        var storeId = request.params.storeId; 
-        var variantId = request.params.variantId;  
-        //Date Format : yyyy-MM-ddThh:mm:ss
-        //var datetime = new Date(request.params.datetime);
-        var datetime = request.params.datetime;
-
-        manager.getByStoreVariantDatetime(storeId, variantId, datetime)
-            .then(doc => {
-                var result = resultFormatter.ok(apiVersion, 200, doc);
-                response.send(200, result); 
-            })
-            .catch(e => {
-                var error = resultFormatter.fail(apiVersion, 400, e);
-                response.send(400, error);
-            })
-
-    })
-});
-
-router.post('v1/promo/docs/promoes', (request, response, next) => {
-    db.get().then(db => {
-        var manager = new PromoManager(db, {
+        var manager = new StoreManager(db, {
             username: 'router'
         });
         
@@ -84,7 +58,7 @@ router.post('v1/promo/docs/promoes', (request, response, next) => {
 
         manager.create(data)
             .then(docId => {
-                response.header('Location', `promo/docs/promoes/${docId.toString()}`);
+                response.header('Location', `masters/stores/${docId.toString()}`);
                 var result = resultFormatter.ok(apiVersion, 201);
                 response.send(201, result);
             })
@@ -96,9 +70,9 @@ router.post('v1/promo/docs/promoes', (request, response, next) => {
     })
 });
 
-router.put('v1/promo/docs/promoes/:id', (request, response, next) => {
+router.put('v1/master/stores/:id', (request, response, next) => {
     db.get().then(db => {
-        var manager = new PromoManager(db, {
+        var manager = new StoreManager(db, {
             username: 'router'
         });
         
@@ -118,9 +92,9 @@ router.put('v1/promo/docs/promoes/:id', (request, response, next) => {
     })
 });
 
-router.del('v1/promo/docs/promoes/:id', (request, response, next) => {
+router.del('v1/master/stores/:id', (request, response, next) => {
     db.get().then(db => {
-        var manager = new PromoManager(db, {
+        var manager = new StoreManager(db, {
             username: 'router'
         });
         
