@@ -50,6 +50,31 @@ router.get('/:id', (request, response, next) => {
     })
 });
 
+router.get('/:storeid/:datefrom/:dateto', (request, response, next) => {
+    db.get().then(db => {
+        var manager = new PaymentManager(db, {
+            username: 'router'
+        });
+        // format date : yyyy/MM/dd
+        var storeid = request.params.storeid;
+        var datefrom = request.params.datefrom;
+        var dateto = request.params.dateto;
+
+        manager.getByStoreDatefromDateTo(storeid, datefrom, dateto)
+            .then(docs => {
+                var result = resultFormatter.ok(apiVersion, 200, docs.data);
+                delete docs.data;
+                result.info = docs;
+                response.send(200, result);
+            })
+            .catch(e => {
+                var error = resultFormatter.fail(apiVersion, 400, e);
+                response.send(400, error);
+            })
+
+    })
+});
+
 router.post('/', (request, response, next) => {
     db.get().then(db => {
         var manager = new PaymentManager(db, {
