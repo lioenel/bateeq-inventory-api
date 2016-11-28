@@ -6,22 +6,19 @@ var resultFormatter = require("../../../result-formatter");
 var ObjectId = require("mongodb").ObjectId;
 
 const apiVersion = '1.0.0';
-   
-router.get('/exportall', (request, response, next) => {
+      
+router.get('/:id/exportall', (request, response, next) => {
     db.get().then(db => {
         var Manager = map.get("efr-kb-rtp");
         var manager = new Manager(db, {
             username: 'router'
         }); 
         
-        var query = request.query;
+        var id = request.params.id; 
          
-        manager.read(query)
-            .then(docs => {
-
-                var result = resultFormatter.ok(apiVersion, 200, docs.data);
-                delete docs.data;
-                result.info = docs;
+        manager.getSingleById(id)
+            .then(doc => {
+                
                 
                 var dateFormat = "DD MMM YYYY";
                 var locale = 'id-ID';
@@ -29,21 +26,19 @@ router.get('/exportall', (request, response, next) => {
                 moment.locale(locale);
                 
                 var data = [];
-                var index = 0;
-                for (var document of result.data) { 
-                    for(var item of document.items) {
-                         var _data = {
-                            "Nomor Referensi": document.code,
-                            "Dari": document.source.code,
-                            "Ke": document.destination.code,
-                            "Barcode": item.item.code,
-                            "Nama": item.item.name,
-                            "QTY": item.quantity,
-                            "Catatan": item.remark
-                        }
-                        data.push(_data); 
-                    } 
-                }
+                var index = 0; 
+                for(var item of doc.items) {
+                        var _data = {
+                        "Nomor Referensi": doc.code,
+                        "Dari": doc.source.code,
+                        "Ke": doc.destination.code,
+                        "Barcode": item.item.code,
+                        "Nama": item.item.name,
+                        "QTY": item.quantity,
+                        "Catatan": item.remark
+                    }
+                    data.push(_data); 
+                }  
 
                 if ((request.headers.accept || '').toString().indexOf("application/xls") < 0) {
                     var result = resultFormatter.ok(apiVersion, 200, data);
