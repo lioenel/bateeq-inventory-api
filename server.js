@@ -16,8 +16,7 @@ server.use(restify.CORS({
     headers: ['Content-Disposition']
 }));
 
-var originRouter = require('./src/routers/v1/inventory/storage-router');
-originRouter.applyRoutes(server, "v1/inventory/storages");
+ 
 
 var storageInventoryRouter = require('./src/routers/v1/inventory/storage-inventory-router');
 storageInventoryRouter.applyRoutes(server, "v1/inventory/storages");
