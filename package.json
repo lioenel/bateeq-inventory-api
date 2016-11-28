@@ -6,6 +6,7 @@
   "dependencies": {
     "bateeq-module": "git+https://github.com/danliris/bateeq-module.git#dev",
     "json2xls": "^0.1.2",
+    "moment": "^2.16.0",
     "fast-csv": "^2.3.0",
     "js-toolkit": "git+https://github.com/pinkgorilla/js-toolkit.git",
     "mongo-factory": "^1.0.0",
