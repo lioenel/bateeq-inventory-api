@@ -7,7 +7,7 @@ var ObjectId = require("mongodb").ObjectId;
 
 const apiVersion = '1.0.0';
       
-router.get('/exportall/:id', (request, response, next) => {
+router.get('/:id/exportall', (request, response, next) => {
     db.get().then(db => {
         var Manager = map.get("efr-kb-rtp");
         var manager = new Manager(db, {
