@@ -1,6 +1,6 @@
 var Router = require('restify-router').Router;;
 var router = new Router();
-var StorageManager = require('bateeq-module').inventory.StorageManager;
+var StorageManager = require('bateeq-module').master.StorageManager;
 var InventoryManager = require('bateeq-module').inventory.InventoryManager;
 var InventoryMovementManager = require('bateeq-module').inventory.InventoryMovementManager;
 var db = require('../../../db');
@@ -8,17 +8,17 @@ var resultFormatter = require("../../../result-formatter");
 
 const apiVersion = '1.0.0';
 
-router.get('/:storageId/inventories/:articleVariantId/movements', (request, response, next) => {
+router.get('/:storageId/inventories/:itemId/movements', (request, response, next) => {
     db.get().then(db => {
         var manager = new InventoryMovementManager(db, {
             username: 'router'
         });
 
         var storageId = request.params.storageId;
-        var articleVariantId = request.params.articleVariantId;
+        var itemId = request.params.itemId;
         var query = request.query;
 
-        manager.readByStorageIdAndArticleVariantId(storageId, articleVariantId, query)
+        manager.readByStorageIdAndItemId(storageId, itemId, query)
             .then(docs => {
                 var result = resultFormatter.ok(apiVersion, 200, docs.data);
                 delete docs.data;
@@ -33,17 +33,17 @@ router.get('/:storageId/inventories/:articleVariantId/movements', (request, resp
     })
 });
 
-router.get('/:storageId/inventories/:articleVariantId/movements/:id', (request, response, next) => {
+router.get('/:storageId/inventories/:itemId/movements/:id', (request, response, next) => {
     db.get().then(db => {
         var manager = new InventoryMovementManager(db, {
             username: 'router'
         });
 
         var storageId = request.params.storageId;
-        var articleVariantId = request.params.articleVariantId;
+        var itemId = request.params.itemId;
         var id = request.params.id;
 
-        manager.getByStorageIdAndArticleVarianIdAndId(storageId, articleVariantId, id)
+        manager.getByStorageIdAndItemIdAndId(storageId, itemId, id)
             .then(doc => {
                 var result = resultFormatter.ok(apiVersion, 200, doc);
                 response.send(200, result);
