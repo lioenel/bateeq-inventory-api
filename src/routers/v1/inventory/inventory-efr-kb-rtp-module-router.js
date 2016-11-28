@@ -19,6 +19,7 @@ router.get('/:id/exportall', (request, response, next) => {
         manager.getSingleById(id)
             .then(doc => {
                 
+                
                 var dateFormat = "DD MMM YYYY";
                 var locale = 'id-ID';
                 var moment = require('moment');
