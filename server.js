@@ -10,6 +10,10 @@
 var restify = require('restify');
 restify.CORS.ALLOW_HEADERS.push('authorization');
 var server = restify.createServer();
+
+var json2xls = require('json2xls');
+server.use(json2xls.middleware);
+
 server.use(restify.queryParser());
 server.use(restify.bodyParser());
 server.use(restify.CORS({
@@ -29,6 +33,9 @@ transferInDocRouter.applyRoutes(server, "v1/inventory/docs/transfer-in");
 
 var transferOutDocRouter = require('./src/routers/v1/inventory/transfer-out-doc-router');
 transferOutDocRouter.applyRoutes(server, "v1/inventory/docs/transfer-out");
+ 
+var inventoryEfrKbRtpModuleRouter = require('./src/routers/v1/inventory/inventory-efr-kb-rtp-module-router');
+inventoryEfrKbRtpModuleRouter.applyRoutes(server, "v1/inventory/docs/efr-kb-rtp");
 
 var inventoryReceiveModuleRouter = require('./src/routers/v1/inventory/inventory-receive-module-router');
 inventoryReceiveModuleRouter.applyRoutes(server, "v1/inventory/docs");
