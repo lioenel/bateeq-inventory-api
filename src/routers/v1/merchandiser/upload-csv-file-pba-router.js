@@ -3,7 +3,7 @@ var router = new Router();
 var map = require('bateeq-module').merchandiser.map;
 var db = require('../../../db');
 var resultFormatter = require("../../../result-formatter");
-
+var passport = require('../../../passports/jwt-passport');
 var fs = require('fs');
 var csv = require('fast-csv');
 
@@ -23,14 +23,14 @@ router.post('/', (request, response, next) => {
             username: 'router'
         });
 
-             fs.createReadStream(request.files.fileUpload.path)
+        fs.createReadStream(request.files.fileUpload.path)
             .pipe(csv())
             .on('data', function (data) {
                 dataCsv.push(data);
             })
             .on('end', function (data) {
                 dataAll = dataCsv;
-                 if (dataAll[0][0] === "PackingList" && dataAll[0][1] === "Password" && dataAll[0][2] === "Barcode" && dataAll[0][3] === "Name" && dataAll[0][4] === "Size" && dataAll[0][5] === "Price" && dataAll[0][6] === "UOM" && dataAll[0][7] === "QTY" && dataAll[0][8] === "RO") {
+                if (dataAll[0][0] === "PackingList" && dataAll[0][1] === "Password" && dataAll[0][2] === "Barcode" && dataAll[0][3] === "Name" && dataAll[0][4] === "Size" && dataAll[0][5] === "Price" && dataAll[0][6] === "UOM" && dataAll[0][7] === "QTY" && dataAll[0][8] === "RO") {
                     manager.insert(dataAll, request.params.sourceId, request.params.destinationId, request.params.date)
                         .then(doc => {
                             if (doc[0]["Error"] === undefined) {
@@ -49,9 +49,9 @@ router.post('/', (request, response, next) => {
                                     "QTY": "string",
                                     "RO": "string",
                                     "Error": "string"
-                                }; 
-                                response.xls(`Error Log-Pemasukan Barang Embalase ${moment(new Date()).format(dateFormat)}.xlsx`, doc, options); 
-                                
+                                };
+                                response.xls(`Error Log-Pemasukan Barang Embalase ${moment(new Date()).format(dateFormat)}.xlsx`, doc, options);
+
                             }
                         })
                         .catch(e => {
@@ -63,7 +63,7 @@ router.post('/', (request, response, next) => {
                     response.send(404, error);
 
                 }
-            }); 
+            });
     })
 });
 

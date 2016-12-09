@@ -1,4 +1,4 @@
-var AccountManager = require('dl-module').managers.auth.AccountManager;
+var AccountManager = require('bateeq-module').auth.AccountManager;
 var db = require('../db');
 var passport = require('passport');
 
